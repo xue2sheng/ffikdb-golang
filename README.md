@@ -15,7 +15,7 @@ For example, on my Archlinux daily driver, **ffikdb.so** was copied to *$QHOME/l
 	  libc.so.6 => /usr/lib/libc.so.6 (0x00007f8d0c619000)
 	  /usr/lib64/ld-linux-x86-64.so.2 => /usr/lib64/ld-linux-x86-64.so.2 (0x00007f8d0ca5d000)
 
-Then, just double check is really with that [KxSystem/ffi example](https://code.kx.com/q/interfaces/ffi/examples/):
+Then, just double check is really working with that [KxSystem/ffi example](https://code.kx.com/q/interfaces/ffi/examples/):
 
 	q)\l ffi.q
 	q)buffer: 80#"\000"
