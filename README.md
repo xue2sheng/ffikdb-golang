@@ -23,3 +23,28 @@ Then, just double check is really working with that [KxSystem/ffi example](https
 	q)n:.ffi.callFunction[("i"; `sprintf)] args
 	q)buffer til n
 	"example 3.1600 32767"
+
+## basic golang dynamic library
+
+Build your [source code](basic/main.go) into a dynamic shared library by invoking *make*:
+
+	go build -buildmode=c-shared -o libgolang.so . 
+
+That should create your basic libgolang.so library. Do not forget to add its path to *LD_LIBRARY_PATH* before calling *q* prompt:
+
+	q)\l ffi.q
+	q).golang.cgoCurrentMillis:.ffi.bind[`libgolang.so`cgoCurrentMillis; "i"; "j"]
+
+Previous command *binds* your **golang** function to a **kdb+** one:
+
+	q).golang.cgoCurrentMillis (0; ::)
+	1663701692
+	q).golang.cgoCurrentMillis (0; ::)
+	1663701694
+	q).golang.cgoCurrentMillis (0; ::)
+	1663701695
+	q).golang.cgoCurrentMillis (0; ::)
+	1663701696
+
+Pay attention to the fact that your calling your *kdb+* function with at least one argument, that fake integer at .ffi.bind.,  although your *golang* function doesn't have any. More details at [ffi kdb+ reference](https://code.kx.com/q/interfaces/ffi/reference/#ffibind)
+
